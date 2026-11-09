@@ -1,0 +1,13 @@
+[mgr]
+prepend_keymap = [
+  # Quic  # Open lazygit
+  { on = ["<C-g>"], run = "shell 'lazygit' --block", desc = "Open lazygit" },
+  { on = ["g","i"], run = "plugin lazygit", desc = "Run lazygit" },
+  { on = ["<C-d>"], run = "plugin diff", desc = "Diff the selected with the hovered file" },
+  { on = ["c", "m"], run = "plugin chmod", desc = "Chmod on selected files" },
+  { on = ["<C-y>"], run = "plugin wl-clipboard", desc = "Copy to cliboard"},
+
+  { on = [ "g", "s"], run = "cd /mnt/shared", desc = "Switch to shared volume" },
+  { on = [ "g", "p"], run = "cd ~/projects", desc = "Switch to projects" },
+  { on = [ "g", "f"], run = 'search_do --via=fd --args="-d 3"', desc = "Switch to flat view" }
+]

@@ -1,0 +1,109 @@
+* {
+    font: "Iosevka Nerd Font Propo 11.6";
+    g-spacing: 10px;
+    g-margin: 0;
+    b-color: #282828FF;
+    fg-color: #d4be98FF;
+    fgp-color: #bfab96FF;
+    b-radius: 8px;
+    g-padding: 8px;
+    hl-color: #6a675fFF;
+    hlt-color: #d4be98FF;
+    wbg-color: #45403dCC;
+    w-border: 0px solid;
+    w-border-color: #8b8478;
+    w-padding: 12px;
+}
+
+
+configuration {
+    modi: "combi,drun,launcher:/home/alfiepearce/.config/rofi/scripts/launcher.sh";
+    combi-modes: "launcher,drun";
+
+    show-icons: true;
+
+    matching: "fuzzy";
+    sort: true;
+    sorting-method: "fzf";
+}
+
+listview {
+    columns: 1;
+    lines: 7;
+    fixed-height: true;
+    fixed-columns: true;
+    cycle: false;
+    scrollbar: false;
+    border: 0px solid;
+}
+
+window {
+    transparency: "real";
+    width: 800px;
+    location: north;
+    anchor: north;
+    y-offset: 20px;
+    border-radius: @b-radius;
+    background-color: @wbg-color;
+    border: @w-border;
+    border-color: @w-border-color;
+    padding: @w-padding;
+}
+
+prompt {
+    text-color: @fg-color;
+}
+
+inputbar {
+    children: ["prompt", "entry"];
+    spacing: @g-spacing;
+}
+
+entry {
+    placeholder: "Search or enter a command...";
+    text-color: @fg-color;
+    placeholder-color: @fgp-color;
+}
+
+mainbox {
+    spacing: @g-spacing;
+    margin: @g-margin;
+    padding: @g-padding;
+    children: ["inputbar", "listview", "message"];
+}
+
+element {
+    spacing: @g-spacing;
+    margin: @g-margin;
+    padding: @g-padding;
+    border: 0px solid;
+    border-radius: @b-radius;
+    border-color: @b-color;
+    background-color: transparent;
+    text-color: @fg-color;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg-color;
+}
+
+element selected.active {
+    background-color: transparent;
+	border: 2px solid;
+    border-color: @hl-color;
+	text-color: @hlt-color;
+}
+
+element selected.normal {
+    background-color: transparent;
+    border: 2px solid;
+    border-color: @hl-color;
+	text-color: @hlt-color;
+}
+
+message {
+    background-color: red;
+    border: 0px solid;
+}

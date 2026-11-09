@@ -1,0 +1,105 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus";
+    display-drun: " Apps ";
+    display-run: " Run ";
+    display-window: " Windows ";
+    drun-display-format: "{icon}  {name}";
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+}
+
+* {
+    font: "Iosevka Nerd Font Propo 11.6";
+    g-spacing: 10px;
+    g-margin: 0;
+    b-color: #282828FF;
+    fg-color: #d4be98FF;
+    fgp-color: #bfab96FF;
+    b-radius: 8px;
+    g-padding: 8px;
+    hl-color: #6a675fFF;
+    hlt-color: #d4be98FF;
+    wbg-color: #45403dCC;
+    w-padding: 12px;
+}
+
+listview {
+    columns: 1;
+    lines: 7;
+    spacing: 8px;
+    fixed-height: false;
+    fixed-columns: true;
+    cycle: false;
+    scrollbar: false;
+}
+
+window {
+    transparency: "real";
+    width: 800px;
+    location: north;
+    anchor: north;
+    y-offset: 20px;
+    border-radius: @b-radius;
+    background-color: @wbg-color;
+    padding: @w-padding;
+}
+
+prompt {
+    text-color: @fg-color;
+}
+
+inputbar {
+    children: ["prompt", "entry"];
+    spacing: @g-spacing;
+}
+
+entry {
+    placeholder: "Search Apps";
+    text-color: @fg-color;
+    placeholder-color: @fgp-color;
+}
+
+mainbox {
+    spacing: @g-spacing;
+    margin: @g-margin;
+    padding: @g-padding;
+    children: ["inputbar", "listview", "message"];
+}
+
+element {
+    spacing: @g-spacing;
+    margin: @g-margin;
+    padding: @g-padding;
+    border: 0px solid;
+    border-radius: @b-radius;
+    border-color: @b-color;
+    background-color: transparent;
+    text-color: @fg-color;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg-color;
+}
+
+element selected.active {
+    background-color: transparent;
+	border-width: 2px;
+    border-color: @hl-color;
+	text-color: @hlt-color;
+}
+
+element selected.normal {
+    background-color: transparent;
+    border-width: 2px;
+    border-color: @hl-color;
+	text-color: @hlt-color;
+}
+
+message {
+    background-color: red;
+}

@@ -1,0 +1,75 @@
+[mgr]
+ratio = [1, 4, 3]  # Pane width ratios [parent, current, preview]
+sort_by = "natural"  # natural, mtime, extension, alphabetical, size
+sort_dir_first = true  # Directories listed before files
+show_hidden = true  # Show dotfiles
+scrolloff = 5  # Cursor padding from edge
+linemode = "none"  # none, size, mtime, permissions, owner
+
+[preview]
+wrap = "no"  # Line wrapping in preview
+tab_size = 2  # Tab width in preview
+max_width = 600  # Max image preview width
+max_height = 900  # Max image preview height
+
+[opener]
+edit = [
+  { run = 'nvim "$@"', desc = "Neovim", block = true },
+]
+open = [
+  { run = 'xdg-open "$1"', orphan = true, desc = "Open" },
+]
+pdf = [
+  { run = 'zathura "$1"', orphan = true, desc = "Zathura" },
+]
+reveal = [
+  { run = 'exiftool "$1"; echo; read -p "Press enter to exit..."', block = true, desc = "EXIF" },
+]
+extract = [
+  { run = 'unar "$1"', desc = "Extract here", block = true },
+]
+play = [
+  { run = 'mpv "$@"', orphan = true, desc = "mpv" },
+]
+
+[open]
+rules = [
+	{ mime = "application/pdf", use = ["pdf"] },
+]
+
+#[open]
+#rules = [
+#  # { name = "*/", use = [ "edit", "open", "reveal" ] },
+#
+#  { mime = "text/*", use = ["edit", "reveal"] },
+#  { mime = "image/*", use = ["open", "reveal"] },
+#  { mime = "video/*", use = ["play", "reveal"] },
+#  { mime = "audio/*", use = ["play", "reveal"] },
+#  { mime = "inode/x-empty", use = ["edit", "reveal"] },
+#
+#  { mime = "application/json", use = ["edit", "reveal"] },
+#  { mime = "*/javascript", use = ["edit", "reveal"] },
+#
+#  { mime = "application/zip", use = ["extract", "reveal"] },
+#  { mime = "application/gzip", use = ["extract", "reveal"] },
+#  { mime = "application/x-tar", use = ["extract", "reveal"] },
+#  { mime = "application/x-bzip", use = ["extract", "reveal"] },
+#  { mime = "application/x-bzip2", use = ["extract", "reveal"] },
+#  { mime = "application/x-7z-compressed", use = ["extract", "reveal"] },
+#  { mime = "application/x-rar", use = ["extract", "reveal"] },
+#  { mime = "application/xz", use = ["extract", "reveal"] },
+#
+#  { mime = "*", use = ["open", "reveal"] },
+#]
+
+[[plugin.prepend_fetchers]]
+id = "git"
+url = "*"
+run = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+id = "git"
+url = "*/"
+run = "git"
+group = "git"
