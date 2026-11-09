@@ -1,0 +1,70 @@
+# ==========================================================
+# Secrets and sensitive information
+# ==========================================================
+
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.secret
+*.token
+secrets/
+credentials/
+
+# ==========================================================
+# Runtime files and caches
+# ==========================================================
+
+.cache/
+Cache/
+cache/
+__pycache__/
+*.py[cod]
+*.log
+*.pid
+
+# ==========================================================
+# Temporary and editor files
+# ==========================================================
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ==========================================================
+# Application data
+# ==========================================================
+
+# Obsidian contains local application data and cache files
+/obsidian/
+
+# Music lyrics downloaded by rmpc
+**/lyrics/
+
+# ==========================================================
+# Backups
+# ==========================================================
+
+/backups/
+
+# ==========================================================
+# Nested Git repositories
+# ==========================================================
+
+# Ignore Git metadata belonging to cloned plugins
+# while keeping their actual configuration/source files
+.git/
+
+# ==========================================================
+# Locally installed plugins
+# ==========================================================
+
+# Yazi, Nvim, Zsh plugins are installed separately
+/zsh/.config/zsh/plugins/
+/yazi/.config/yazi/plugins/
+nvim/.config/nvim/pack/github/
