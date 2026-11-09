@@ -1,0 +1,11 @@
+#!/bin/sh
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+# Fetch lyrics
+"$SCRIPT_DIR/fetch-lyrics" &
+
+# Show a notification
+"$SCRIPT_DIR/notify"
+
+exit 0

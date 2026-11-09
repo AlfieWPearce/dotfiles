@@ -1,0 +1,210 @@
+#![enable(implicit_some)]
+#![enable(unwrap_newtypes)]
+#![enable(unwrap_variant_newtypes)]
+(
+    address: "/tmp/mpd_socket",
+    cache_dir: Some("/tmp/rmpc/cache"),
+    lyrics_dir: Some("~/.config/rmpc/lyrics"),
+    on_song_change: ["~/.config/rmpc/scripts/song-change"],
+    exec_on_song_change_at_start: true,
+    on_exit: ["rmpc", "--address", "/tmp/mpd_socket", "stop"],
+    password: None,
+    theme: "gruvbox",
+    volume_step: 5,
+    max_fps: 30,
+    scrolloff: 0,
+    wrap_navigation: false,
+    enable_mouse: true,
+    scroll_amount: 1,
+    enable_config_hot_reload: true,
+    enable_lyrics_hot_reload: true,
+    status_update_interval_ms: 1000,
+    rewind_to_start_sec: Some(5),
+    keep_state_on_song_change: true,
+    reconnect_interval_ms: 2000,
+    reflect_changes_to_playlist: false,
+    select_current_song_on_change: true,
+    center_current_song_on_change: true,
+    ignore_leading_the: true,
+    browser_song_sort: [Disc, Track, Artist, Title],
+    directories_sort: SortFormat(group_by_type: true, reverse: false),
+    auto_open_downloads: true,
+    album_art: (
+        method: Auto,
+        max_size_px: (width: 1200, height: 1200),
+        disabled_protocols: ["http://", "https://"],
+        vertical_align: Center,
+        horizontal_align: Center,
+    ),
+    keybinds: (
+        global: {
+            "q":          Quit,
+            "?":          ShowHelp,
+            ":":          CommandMode,
+            "oI":         ShowCurrentSongInfo,
+            "oo":         ShowOutputs,
+            "op":         ShowDecoders,
+            "od":         ShowDownloads,
+            "oP":         Partition(),
+            "z":          ToggleRepeat,
+            "x":          ToggleRandom,
+            "c":          ToggleConsume,
+            "v":          ToggleSingle,
+            "p":          TogglePause,
+            "s":          Stop,
+            ">":          NextTrack,
+            "<":          PreviousTrack,
+            "f":          SeekForward,
+            "b":          SeekBack,
+            ".":          VolumeUp,
+            ",":          VolumeDown,
+            "<Tab>":      NextTab,
+            "gt":         NextTab,
+            "<S-Tab>":    PreviousTab,
+            "gT":         PreviousTab,
+            "1":          SwitchToTab("Playing"),
+            "2":          SwitchToTab("Find"),
+            "3":          SwitchToTab("Dirs"),
+            "4":          SwitchToTab("Lists"),
+            "<C-u>":      Update,
+            "<C-U>":      Rescan,
+            "R":          AddRandom,
+        },
+        navigation: {
+            "<C-c>":      Close,
+            "<Esc>":      Close,
+            "<CR>":       Confirm,
+            "k":          Up,
+            "<Up>":       Up,
+            "j":          Down,
+            "<Down>":     Down,
+            "h":          Left,
+            "<Left>":     Left,
+            "l":          Right,
+            "<Right>":    Right,
+            "<C-w>k":     PaneUp,
+            "<C-Up>":     PaneUp,
+            "<C-w>j":     PaneDown,
+            "<C-Down>":   PaneDown,
+            "<C-w>h":     PaneLeft,
+            "<C-Left>":   PaneLeft,
+            "<C-w>l":     PaneRight,
+            "<C-Right>":  PaneRight,
+            "K":          MoveUp,
+            "J":          MoveDown,
+            "<C-u>":      UpHalf,
+            "<C-d>":      DownHalf,
+            "<C-b>":      PageUp,
+            "<PageUp>":   PageUp,
+            "<C-f>":      PageDown,
+            "<PageDown>": PageDown,
+            "gg":         Top,
+            "G":          Bottom,
+            "<Space>":    Select,
+            "<C-Space>":  InvertSelection,
+            "/":          EnterSearch,
+            "n":          NextResult,
+            "N":          PreviousResult,
+            "a":          Add,
+            "A":          AddAll,
+            "D":          Delete,
+            "<C-r>":      Rename,
+            "i":          FocusInput,
+            "oi":         ShowInfo,
+            "<C-z>":      ContextMenu(),
+            "<C-s>s":     Save(kind: Modal(all: false, duplicates_strategy: Ask)),
+            "<C-s>a":     Save(kind: Modal(all: true, duplicates_strategy: Ask)),
+        },
+        queue: {
+            "d":          Delete,
+            "D":          DeleteAll,
+            "<CR>":       Play,
+            "C":          JumpToCurrent,
+            "X":          Shuffle,
+        },
+    ),
+    search: (
+        case_sensitive: false,
+        mode: Contains,
+        ignore_diacritics: true,
+        tags: [
+            (value: "any",         label: "Any Tag"),
+            (value: "artist",      label: "Artist"),
+            (value: "album",       label: "Album"),
+            (value: "albumartist", label: "Album Artist"),
+            (value: "title",       label: "Title"),
+            (value: "filename",    label: "Filename"),
+            (value: "genre",       label: "Genre"),
+        ],
+    ),
+    artists: (
+        album_display_mode: SplitByDate,
+        album_sort_by: Date,
+    ),
+        tabs: [
+          (
+            name: "Playing",
+            pane: Split(
+              direction: Horizontal,
+              panes: [
+                // LEFT: Queue + Cava
+                (
+                  size: "65%",
+                  pane: Split(
+                    direction: Vertical,
+                    panes: [
+                      (size: "85%", pane: Pane(Queue)),
+                      (size: "15%", pane: Pane(Cava))
+                    ]
+                  )
+                ),
+                // RIGHT: AlbumArt + Lyrics
+                (
+                  size: "35%",
+                  pane: Split(
+                  direction: Vertical,
+                  panes: [
+                    (size: "50%", pane: Pane(AlbumArt)),
+                    (size: "50%", pane: Pane(Lyrics))
+                  ]
+                )
+              )
+            ]
+          )
+        ),
+        (
+            name: "Find",
+            pane: Pane(Search)
+        ),
+        (
+            name: "Dirs",
+            pane: Pane(Directories)
+        ),
+        (
+            name: "Lists",
+            pane: Pane(Playlists)
+        ),
+    ],
+    cava: (
+        framerate: 60, // default 60
+        autosens: true, // default true
+        sensitivity: 80, // default 100
+        lower_cutoff_freq: 50, // not passed to cava if not provided
+        higher_cutoff_freq: 10000, // not passed to cava if not provided
+        input: (
+            method: Fifo,
+            source: "/tmp/mpd.fifo",
+            sample_rate: 44100,
+            channels: 2,
+            sample_bits: 16,
+        ),
+        smoothing: (
+            noise_reduction: 17, // default 77
+            monstercat: false, // default false
+            waves: false, // default false
+        ),
+        // this is a list of floating point numbers thats directly passed to cava
+        // they are passed in order that they are defined
+        eq: []
+    ),
+)
