@@ -1,0 +1,4 @@
+module Services
+singleton ClockService 1.0 ClockService.qml
+singleton MprisService 1.0 MprisService.qml
+singleton SystemService 1.0 SystemService.qml
