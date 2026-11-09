@@ -1,0 +1,180 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus";
+    display-drun: " Apps ";
+    display-run: " Run ";
+    display-window: " Windows ";
+    drun-display-format: "{icon}  {name}";
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+}
+
+/* ---- Base Palette -------------------------------- */ 
+
+* {
+    bg0:            rgba (24, 24, 24, 92%);
+    bg1:            rgba (40, 40, 40, 96%);
+    bg2:            rgba (60, 56, 54, 100%);
+
+    fg0:            #ebdbb2;
+    fg1:            #d5c4a1;
+
+    accent:         #a89984;
+
+    urgent:         #cc241d;
+    selected:       #83a598;
+
+    border-colour:  @accent;
+
+    background-color: transparent;
+    text-color:       @fg0;
+
+    font: "Iosevka Nerd Font Propo 11.6";
+
+    border-radius: 16px;
+}
+
+/* ---- Window -------------------------------------- */
+
+window {
+    transparency: "real";
+    location: center;
+    anchor: center;
+
+    fullscreen: false;
+    width: 640px;
+
+    border: 2px;
+    border-color: @border-colour;
+
+    border-radius: 18px;
+
+    background-color: @bg0;
+
+    padding: 22px;
+}
+
+/* ---- Main Layout --------------------------------- */
+
+mainbox {
+    spacing: 18px;
+    children: [ "inputbar", "message", "listview" ];
+}
+
+/* ---- Input Bar ----------------------------------- */
+
+inputbar {
+    background-color: @bg1;
+
+    border: 0px;
+    border-radius: 14px;
+
+    padding: 12px;
+    spacing: 12px;
+
+    children: [ "prompt", "entry" ];
+}
+
+prompt {
+    text-color: @accent;
+    background-color: inherit;
+}
+
+entry {
+    placeholder: "Search...";
+    placeholder-color: rgba (235,219,178,45%);
+    background-color: inherit;
+    text-color: @fg0;
+    cursor-color: @fg0;
+}
+
+/* ---- Message ------------------------------------- */
+
+message {
+    background-color: transparent;
+}
+
+/* ---- List View ----------------------------------- */
+
+listview {
+    lines: 8;
+    columns: 1;
+
+    fixed-height: false;
+
+    spacing: 8px;
+    scrollbar: false;
+
+    background-color: transparent;
+}
+
+/* ---- Elements ------------------------------------ */
+
+element {
+    padding: 12px;
+    border-radius: 12px;
+
+    background-color: transparent;
+    text-color: @fg0;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg0;
+}
+
+element selected.normal {
+    background-color: @bg2;
+    text-color: @selected;
+}
+
+element selected.active {
+    background-color: @bg2;
+    text-color: @selected;
+}
+
+element selected.urgent {
+    background-color: @urgent;
+    text-color: #ffffff;
+}
+
+/* ---- Element Layout ------------------------------ */
+
+element-icon {
+    size: 1.0em;
+    vertical-align: 0.5;
+    margin: 0px 10px 0px 0px;
+    background-color: transparent;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    vertical-align: 0.5;
+}
+
+/* ---- Scrollbar ----------------------------------- */
+
+scrollbar {
+    width: 4px;
+    border-radius: 999px;
+    handle-color: @accent;
+    handle-width: 8px;
+    background-color: rgba (255,255,255,5%);
+}
+
+/* ---- Mode Switcher ------------------------------- */
+
+mode-switcher {
+    enabled: false;
+}
+
+/* ---- Fancy little touch -------------------------- */
+
+textbox-prompt-colon {
+    expand: false;
+    str: "›";
+    text-color: @accent;
+}
