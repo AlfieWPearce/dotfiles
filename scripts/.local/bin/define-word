@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+word=$(wl-paste --primary -n | tr -d '\n')
+
+[ -z "$word" ] && exit 1
+
+json=$(curl -s \
+"https://api.dictionaryapi.dev/api/v2/entries/en/$word")
+
+if echo "$json" | jq -e '.[0].meanings' >/dev/null 2>&1; then
+  echo "$json" |
+  jq -r '
+    .[0].meanings[]
+    | .definitions[]
+    | .definition
+  ' |
+  while IFS= read -r definition; do
+    notify-send -t 30000 -a "define" "📖 $word" "$definition"
+  done
+else
+  notify-send -a "define" "📖 $word" "No definition found"
+fi
